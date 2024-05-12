@@ -5,13 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.params.provider.Arguments;
 import todoapp.data.Task;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class ToDoAppTestData {
-    public static final long ID_FOR_TESTING_UPDATE_PROCESSES = 17031703;
     public static final long ID_FOR_NEGATIVE_TESTING = 500100;
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "admin";
@@ -53,25 +49,6 @@ public class ToDoAppTestData {
     }
 
     /**
-     * TC-ID30
-     */
-    public static Stream<Arguments> checkGetTodosWithOffsetAndLimitTestData() throws JsonProcessingException {
-        List<Task> expectedTasks = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
-        int offset = 2;
-        int limit = 3;
-        int testId = 50 + limit - offset;
-//        int testId = 50 + offset - 1;
-        for (int i = 0; i < limit; i++) {
-            String taskJson = taskDataForList(testId, "ToDo №" + testId);
-            Task task = objectMapper.readValue(taskJson, Task.class);
-            expectedTasks.add(task);
-            testId++;
-        }
-        return Stream.of(Arguments.of(50, 5, offset, limit, expectedTasks));
-    }
-
-    /**
      * TC-ID33
      */
     public static Stream<Arguments> checkFoDuplicateTaskErrorWhenUpdatingTestData() throws JsonProcessingException {
@@ -83,7 +60,7 @@ public class ToDoAppTestData {
      * TC-ID34
      */
     public static Stream<Arguments> checkValidateJsonSchemeTestData() throws JsonProcessingException {
-        return Stream.of(Arguments.of(taskData(35), "src/main/java/todoapp/schemas/todo.json", 35));
+        return Stream.of(Arguments.of(taskData(35), "src/main/resources/todo.json", 35));
     }
 
     public static String taskData(long taskId) throws JsonProcessingException {

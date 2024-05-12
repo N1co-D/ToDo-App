@@ -6,8 +6,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import todoapp.data.Task;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class ToDoAppTestData {
@@ -16,7 +14,7 @@ public class ToDoAppTestData {
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "admin";
 
-        /**
+    /**
      * TC-ID6
      */
     public static Stream<Arguments> checkAddToDoTaskWithNegativeIdTestData() throws JsonProcessingException {
@@ -124,7 +122,7 @@ public class ToDoAppTestData {
                 taskDataWithInvalidComplete("( @_@ )")));
     }
 
-        /**
+    /**
      * TC-ID22
      */
     public static Stream<Arguments> checkUpdateToDoTaskWithNonExistentIdTestData() throws JsonProcessingException {

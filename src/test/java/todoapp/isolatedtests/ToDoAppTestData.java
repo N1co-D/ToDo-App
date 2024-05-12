@@ -19,7 +19,6 @@ public class ToDoAppTestData {
         ObjectMapper objectMapper = new ObjectMapper();
         int offset = 2;
         int limit = 3;
-//        int testId = 50 + limit - offset;
         int testId = 50 + offset;
         for (int i = 0; i < limit; i++) {
             String taskJson = taskDataForList(testId, "ToDo №" + testId);
