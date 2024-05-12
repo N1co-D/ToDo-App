@@ -1,4 +1,4 @@
-package todoapp.isolatedtests.get;
+package todoapp.positivetests.get.isolated;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Description;
@@ -14,16 +14,16 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static todoapp.isolatedtests.BaseTest.*;
+import static todoapp.positivetests.get.isolated.BaseTest.*;
 
 @Isolated
 @Slf4j
-public class ToDoAppIsolatedTest {
+public class ToDoAppGetPositiveIsolatedTest {
 
     @DisplayName("TC-ID30")
     @Description("TC-ID30 Отправка запроса на получение данных о TODO-задачах c параметрами offset и limit")
     @ParameterizedTest
-    @MethodSource("todoapp.isolatedtests.ToDoAppTestData#checkGetTodosWithOffsetAndLimitTestData")
+    @MethodSource("todoapp.positivetests.get.isolated.ToDoAppTestData#checkGetTodosWithOffsetAndLimitTestData")
     public void checkGetTodosWithOffsetAndLimit(long testId, int count, int offset, int limit,
                                                 List<Task> expectedTasks) throws JsonProcessingException {
         log.info("Добавление списка задач для теста");

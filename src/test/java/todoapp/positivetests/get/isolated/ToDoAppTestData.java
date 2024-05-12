@@ -1,4 +1,4 @@
-package todoapp.isolatedtests;
+package todoapp.positivetests.get.isolated;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
