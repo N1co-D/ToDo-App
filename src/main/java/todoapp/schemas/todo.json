@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ToDo json schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "text": {
+      "type": "string"
+    },
+    "completed": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "text",
+    "completed"
+  ]
+}
