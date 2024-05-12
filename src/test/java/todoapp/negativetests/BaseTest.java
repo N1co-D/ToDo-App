@@ -108,7 +108,7 @@ public class BaseTest {
         }
     }
 
-    public void checkNoToDoTask(long expectedId) {
+    public static void checkNoToDoTask(long expectedId) {
         List<Task> response = given()
                 .spec(REQUEST_SPECIFICATION)
                 .when()

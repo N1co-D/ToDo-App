@@ -1,4 +1,4 @@
-package todoapp.isolatedtests;
+package todoapp.isolatedtests.get;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Description;
@@ -14,10 +14,11 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static todoapp.isolatedtests.BaseTest.*;
 
 @Isolated
 @Slf4j
-public class ToDoAppIsolatedTest extends BaseTest {
+public class ToDoAppIsolatedTest {
 
     @DisplayName("TC-ID30")
     @Description("TC-ID30 Отправка запроса на получение данных о TODO-задачах c параметрами offset и limit")
