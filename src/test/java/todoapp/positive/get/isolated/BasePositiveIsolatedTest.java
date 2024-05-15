@@ -41,7 +41,6 @@ public class BasePositiveIsolatedTest {
     public static void addToDoTaskListForTest(int count, BigInteger testId) throws JsonProcessingException {
         for (int i = 0; i < count; i++) {
             addTaskForTest(taskDataForList(testId, "ToDo №" + testId));
-//            testId++;
             testId = testId.add(BigInteger.ONE);
         }
     }
@@ -49,7 +48,6 @@ public class BasePositiveIsolatedTest {
     public static void deleteToDoTaskListForTest(int count, BigInteger testId) {
         for (int i = 0; i < count; i++) {
             clearData(testId);
-//            testId++;
             testId = testId.add(BigInteger.ONE);
         }
     }

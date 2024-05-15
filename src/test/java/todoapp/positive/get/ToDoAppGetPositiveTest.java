@@ -76,8 +76,7 @@ public class ToDoAppGetPositiveTest {
                 .statusCode(200);
 
         log.info("Извлечение первой задачи из списка");
-        JsonPath jsonPath = response.jsonPath();
-        String firstTask = jsonPath.getString("[0]");
+        String firstTask = response.jsonPath().getString("[0]");
 
         log.info("Проверка на соответствие структуры первой задачи с json-схемой");
         given()

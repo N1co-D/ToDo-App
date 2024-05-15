@@ -19,7 +19,6 @@ public class ToDoAppTestData {
      * TC-ID6
      */
     public static Stream<Arguments> checkAddToDoTaskWithNegativeIdTestData() throws JsonProcessingException {
-//        return Stream.of(Arguments.of(taskData(-1)));
         return Stream.of(Arguments.of(taskData(BigInteger.valueOf(-1))));
     }
 
@@ -55,7 +54,6 @@ public class ToDoAppTestData {
      * TC-ID11
      */
     public static Stream<Arguments> checkUpdateToDoTaskWithNegativeIdTestData() throws JsonProcessingException {
-//        return Stream.of(Arguments.of(-1, taskData(-1)));
         return Stream.of(Arguments.of(BigInteger.valueOf(-1), taskData(BigInteger.valueOf(-1))));
     }
 
@@ -143,7 +141,6 @@ public class ToDoAppTestData {
      * TC-ID24
      */
     public static Stream<Arguments> checkDeleteToDoTaskWithInvalidUsernameTestData() throws JsonProcessingException {
-//        return Stream.of(Arguments.of(taskData(24), 24, "none", PASSWORD));
         return Stream.of(Arguments.of(taskData(BigInteger.valueOf(24)), BigInteger.valueOf(24),
                 "none", PASSWORD));
     }
@@ -152,7 +149,6 @@ public class ToDoAppTestData {
      * TC-ID25
      */
     public static Stream<Arguments> checkDeleteToDoTaskWithInvalidPasswordTestData() throws JsonProcessingException {
-//        return Stream.of(Arguments.of(taskData(25), 25, USERNAME, "none"));
         return Stream.of(Arguments.of(taskData(BigInteger.valueOf(25)), BigInteger.valueOf(25), USERNAME,
                 "none"));
     }
@@ -175,9 +171,7 @@ public class ToDoAppTestData {
      * TC-ID28
      */
     public static Stream<Arguments> checkAddSeveralToDoTaskWithSameIdTestData() throws JsonProcessingException {
-//        return Stream.of(Arguments.of(taskData(28),
         return Stream.of(Arguments.of(taskData(BigInteger.valueOf(28)),
-//                secondTaskData(28, "14:00 Something to complete"), 28));
                 secondTaskData(BigInteger.valueOf(28), "14:00 Something to complete"), BigInteger.valueOf(28)));
     }
 

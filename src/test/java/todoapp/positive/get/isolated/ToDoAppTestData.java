@@ -21,13 +21,11 @@ public class ToDoAppTestData {
         ObjectMapper objectMapper = new ObjectMapper();
         int offset = 2;
         int limit = 3;
-//        int testId = 50 + offset;
-        ID_FOR_TESTING_FILTER = BigInteger.valueOf(50 + offset);
+        ID_FOR_TESTING_FILTER = ID_FOR_TESTING_FILTER.add(BigInteger.valueOf(offset));
         for (int i = 0; i < limit; i++) {
             String taskJson = taskDataForList(ID_FOR_TESTING_FILTER, "ToDo №" + ID_FOR_TESTING_FILTER);
             ToDoTask toDoTask = objectMapper.readValue(taskJson, ToDoTask.class);
             expectedToDoTasks.add(toDoTask);
-//            testId++;
             ID_FOR_TESTING_FILTER = ID_FOR_TESTING_FILTER.add(BigInteger.ONE);
         }
         return Stream.of(Arguments.of(BigInteger.valueOf(50), 5, offset, limit, expectedToDoTasks));

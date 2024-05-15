@@ -100,7 +100,6 @@ public class BaseNegativeTest {
         for (int i = 0; i < count; i++) {
             addTaskForTest(taskDataForList(testId, "ToDo №" + testId));
             testId = testId.add(BigInteger.ONE);
-//            testId++;
         }
     }
 
@@ -108,7 +107,6 @@ public class BaseNegativeTest {
         for (int i = 0; i < count; i++) {
             clearData(testId);
             testId = testId.add(BigInteger.ONE);
-//            testId++;
         }
     }
 
@@ -123,7 +121,6 @@ public class BaseNegativeTest {
                 });
 
         assertFalse(response.stream().anyMatch(task -> task.getId() == expectedId));
-//        assertFalse(response.stream().anyMatch(task -> Objects.equals(task.getId(), expectedId)));
     }
 
     public static void clearData(BigInteger id) {
