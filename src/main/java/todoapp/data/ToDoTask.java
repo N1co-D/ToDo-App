@@ -10,7 +10,7 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ToDoTask {
-    BigInteger id;
-    String text;
-    boolean completed;
+    private BigInteger id;
+    private String text;
+    private boolean completed;
 }

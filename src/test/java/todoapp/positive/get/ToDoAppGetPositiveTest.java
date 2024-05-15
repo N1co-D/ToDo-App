@@ -13,6 +13,8 @@ import todoapp.data.ToDoTask;
 
 import java.io.File;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -43,15 +45,14 @@ public class ToDoAppGetPositiveTest {
     @MethodSource("todoapp.positive.ToDoAppTestData#checkGetToDoTaskWithNonExistentIdTestData")
     public void checkGetToDoTaskWithNonExistentId(BigInteger expectedId) {
         log.info("Отправка запроса на получение данных о TODO-задачах");
-        List<ToDoTask> response = given()
+        List<ToDoTask> response = Arrays.asList(given()
                 .spec(REQUEST_SPECIFICATION)
                 .when()
                 .get()
                 .then()
                 .statusCode(200)
                 .spec(RESPONSE_SPECIFICATION)
-                .extract().body().as(new TypeRef<>() {
-                });
+                .extract().body().as(ToDoTask[].class));
 
         log.info("Проверка отсутствия задачи с несуществующим id");
         assertFalse(response.stream().anyMatch(task -> task.getId() == expectedId));

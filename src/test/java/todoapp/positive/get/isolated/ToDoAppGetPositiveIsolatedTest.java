@@ -2,7 +2,6 @@ package todoapp.positive.get.isolated;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Description;
-import io.restassured.common.mapper.TypeRef;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.parallel.Isolated;
@@ -11,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import todoapp.data.ToDoTask;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -31,7 +31,7 @@ public class ToDoAppGetPositiveIsolatedTest {
         addToDoTaskListForTest(count, testId);
 
         log.info("Отправка запроса на получение данных о TODO-задачах c параметрами offset и limit");
-        List<ToDoTask> actualToDoTasks = given()
+        List<ToDoTask> actualToDoTasks = Arrays.asList(given()
                 .spec(REQUEST_SPECIFICATION)
                 .queryParam("offset", offset)
                 .queryParam("limit", limit)
@@ -40,8 +40,7 @@ public class ToDoAppGetPositiveIsolatedTest {
                 .then()
                 .statusCode(200)
                 .spec(RESPONSE_SPECIFICATION)
-                .extract().body().as(new TypeRef<>() {
-                });
+                .extract().body().as(ToDoTask[].class));
 
         log.info("Проверка на соответствие ожидаемых задач с фактическими");
         assertEquals(expectedToDoTasks, actualToDoTasks);
