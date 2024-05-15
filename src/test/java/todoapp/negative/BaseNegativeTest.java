@@ -18,7 +18,6 @@ import todoapp.specs.Specification;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertFalse;

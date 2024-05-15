@@ -1,8 +1,6 @@
 package todoapp.positive.get;
 
 import io.qameta.allure.Description;
-import io.restassured.common.mapper.TypeRef;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +11,6 @@ import todoapp.data.ToDoTask;
 
 import java.io.File;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
