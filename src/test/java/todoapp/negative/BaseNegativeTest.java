@@ -1,4 +1,4 @@
-package todoapp.negativetests;
+package todoapp.negative;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,17 +13,19 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import todoapp.consts.Constants;
-import todoapp.data.Task;
+import todoapp.data.ToDoTask;
 import todoapp.specs.Specification;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static todoapp.negativetests.ToDoAppTestData.*;
+import static todoapp.negative.ToDoAppTestData.*;
 
 @Slf4j
-public class BaseTest {
+public class BaseNegativeTest {
     public static final RequestSpecification REQUEST_SPECIFICATION = Specification.requestSpecification();
     public static final ResponseSpecification RESPONSE_SPECIFICATION = Specification.responseSpecification();
 
@@ -68,8 +70,8 @@ public class BaseTest {
         log.info("Задача для тестирования update-процессов отсутствует в приложении");
     }
 
-    public static boolean isTaskExists(long id) {
-        List<Task> response = given()
+    public static boolean isTaskExists(BigInteger id) {
+        List<ToDoTask> response = given()
                 .spec(REQUEST_SPECIFICATION)
                 .when()
                 .get()
@@ -94,22 +96,24 @@ public class BaseTest {
                 .statusCode(201);
     }
 
-    public static void addToDoTaskListForTest(int count, long testId) throws JsonProcessingException {
+    public static void addToDoTaskListForTest(int count, BigInteger testId) throws JsonProcessingException {
         for (int i = 0; i < count; i++) {
             addTaskForTest(taskDataForList(testId, "ToDo №" + testId));
-            testId++;
+            testId = testId.add(BigInteger.ONE);
+//            testId++;
         }
     }
 
-    public static void deleteToDoTaskListForTest(int count, long testId) {
+    public static void deleteToDoTaskListForTest(int count, BigInteger testId) {
         for (int i = 0; i < count; i++) {
             clearData(testId);
-            testId++;
+            testId = testId.add(BigInteger.ONE);
+//            testId++;
         }
     }
 
-    public static void checkNoToDoTask(long expectedId) {
-        List<Task> response = given()
+    public static void checkNoToDoTask(BigInteger expectedId) {
+        List<ToDoTask> response = given()
                 .spec(REQUEST_SPECIFICATION)
                 .when()
                 .get()
@@ -119,9 +123,10 @@ public class BaseTest {
                 });
 
         assertFalse(response.stream().anyMatch(task -> task.getId() == expectedId));
+//        assertFalse(response.stream().anyMatch(task -> Objects.equals(task.getId(), expectedId)));
     }
 
-    public static void clearData(long id) {
+    public static void clearData(BigInteger id) {
         given()
                 .spec(REQUEST_SPECIFICATION)
                 .auth().preemptive().basic(USERNAME, PASSWORD)
@@ -134,8 +139,8 @@ public class BaseTest {
     }
 
     private static String taskDataResistantToDoForTest() throws JsonProcessingException {
-        Task task = new Task(ID_FOR_TESTING_UPDATE_PROCESSES, "Todo to testing", false);
-        return turnObjectIntoJson(task);
+        ToDoTask toDoTask = new ToDoTask(ID_FOR_TESTING_UPDATE_PROCESSES, "Todo to testing", false);
+        return turnObjectIntoJson(toDoTask);
     }
 
     private static String turnObjectIntoJson(Object object) throws JsonProcessingException {

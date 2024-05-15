@@ -1,5 +1,6 @@
-package todoapp.positivetests;
+package todoapp.positive.get.isolated;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -10,12 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import todoapp.consts.Constants;
 import todoapp.specs.Specification;
 
+import java.math.BigInteger;
+
 import static io.restassured.RestAssured.given;
-import static todoapp.positivetests.ToDoAppTestData.PASSWORD;
-import static todoapp.positivetests.ToDoAppTestData.USERNAME;
+import static todoapp.positive.ToDoAppTestData.*;
 
 @Slf4j
-public class BaseTest {
+public class BasePositiveIsolatedTest {
     public static final RequestSpecification REQUEST_SPECIFICATION = Specification.requestSpecification();
     public static final ResponseSpecification RESPONSE_SPECIFICATION = Specification.responseSpecification();
 
@@ -36,7 +38,23 @@ public class BaseTest {
                 .statusCode(201);
     }
 
-    public static void clearData(long id) {
+    public static void addToDoTaskListForTest(int count, BigInteger testId) throws JsonProcessingException {
+        for (int i = 0; i < count; i++) {
+            addTaskForTest(taskDataForList(testId, "ToDo №" + testId));
+//            testId++;
+            testId = testId.add(BigInteger.ONE);
+        }
+    }
+
+    public static void deleteToDoTaskListForTest(int count, BigInteger testId) {
+        for (int i = 0; i < count; i++) {
+            clearData(testId);
+//            testId++;
+            testId = testId.add(BigInteger.ONE);
+        }
+    }
+
+    public static void clearData(BigInteger id) {
         given()
                 .spec(REQUEST_SPECIFICATION)
                 .auth().preemptive().basic(USERNAME, PASSWORD)

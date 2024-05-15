@@ -1,24 +1,26 @@
-package todoapp.negativetests;
+package todoapp.negative;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.params.provider.Arguments;
-import todoapp.data.Task;
+import todoapp.data.ToDoTask;
+import todoapp.utilities.ConfProperties;
 
 import java.math.BigInteger;
 import java.util.stream.Stream;
 
 public class ToDoAppTestData {
-    public static final long ID_FOR_TESTING_UPDATE_PROCESSES = 17033071;
-    public static final long ID_FOR_NEGATIVE_TESTING = 100500;
-    public static final String USERNAME = "admin";
-    public static final String PASSWORD = "admin";
+    public static final BigInteger ID_FOR_TESTING_UPDATE_PROCESSES = BigInteger.valueOf(17033071);
+    public static final BigInteger ID_FOR_NEGATIVE_TESTING = BigInteger.valueOf(100500);
+    public static final String USERNAME = ConfProperties.getProperty("username");
+    public static final String PASSWORD = ConfProperties.getProperty("password");
 
     /**
      * TC-ID6
      */
     public static Stream<Arguments> checkAddToDoTaskWithNegativeIdTestData() throws JsonProcessingException {
-        return Stream.of(Arguments.of(taskData(-1)));
+//        return Stream.of(Arguments.of(taskData(-1)));
+        return Stream.of(Arguments.of(taskData(BigInteger.valueOf(-1))));
     }
 
     /**
@@ -53,7 +55,8 @@ public class ToDoAppTestData {
      * TC-ID11
      */
     public static Stream<Arguments> checkUpdateToDoTaskWithNegativeIdTestData() throws JsonProcessingException {
-        return Stream.of(Arguments.of(-1, taskData(-1)));
+//        return Stream.of(Arguments.of(-1, taskData(-1)));
+        return Stream.of(Arguments.of(BigInteger.valueOf(-1), taskData(BigInteger.valueOf(-1))));
     }
 
     /**
@@ -140,14 +143,18 @@ public class ToDoAppTestData {
      * TC-ID24
      */
     public static Stream<Arguments> checkDeleteToDoTaskWithInvalidUsernameTestData() throws JsonProcessingException {
-        return Stream.of(Arguments.of(taskData(24), 24, "none", PASSWORD));
+//        return Stream.of(Arguments.of(taskData(24), 24, "none", PASSWORD));
+        return Stream.of(Arguments.of(taskData(BigInteger.valueOf(24)), BigInteger.valueOf(24),
+                "none", PASSWORD));
     }
 
     /**
      * TC-ID25
      */
     public static Stream<Arguments> checkDeleteToDoTaskWithInvalidPasswordTestData() throws JsonProcessingException {
-        return Stream.of(Arguments.of(taskData(25), 25, USERNAME, "none"));
+//        return Stream.of(Arguments.of(taskData(25), 25, USERNAME, "none"));
+        return Stream.of(Arguments.of(taskData(BigInteger.valueOf(25)), BigInteger.valueOf(25), USERNAME,
+                "none"));
     }
 
     /**
@@ -168,37 +175,39 @@ public class ToDoAppTestData {
      * TC-ID28
      */
     public static Stream<Arguments> checkAddSeveralToDoTaskWithSameIdTestData() throws JsonProcessingException {
-        return Stream.of(Arguments.of(taskData(28),
-                secondTaskData(28, "14:00 Something to complete"), 28));
+//        return Stream.of(Arguments.of(taskData(28),
+        return Stream.of(Arguments.of(taskData(BigInteger.valueOf(28)),
+//                secondTaskData(28, "14:00 Something to complete"), 28));
+                secondTaskData(BigInteger.valueOf(28), "14:00 Something to complete"), BigInteger.valueOf(28)));
     }
 
     /**
      * TC-ID31
      */
     public static Stream<Arguments> checkGetTodosWithNegativeOffsetTestData() {
-        return Stream.of(Arguments.of(60, 5, -2));
+        return Stream.of(Arguments.of(BigInteger.valueOf(60), 5, -2));
     }
 
     /**
      * TC-ID32
      */
     public static Stream<Arguments> checkGetTodosWithNegativeLimitTestData() {
-        return Stream.of(Arguments.of(70, 5, -3));
+        return Stream.of(Arguments.of(BigInteger.valueOf(70), 5, -3));
     }
 
-    public static String taskData(long taskId) throws JsonProcessingException {
-        Task task = new Task(taskId, "Something to complete", false);
-        return turnObjectIntoJson(task);
+    public static String taskData(BigInteger taskId) throws JsonProcessingException {
+        ToDoTask toDoTask = new ToDoTask(taskId, "Something to complete", false);
+        return turnObjectIntoJson(toDoTask);
     }
 
-    public static String taskDataForList(long taskId, String text) throws JsonProcessingException {
-        Task task = new Task(taskId, text, false);
-        return turnObjectIntoJson(task);
+    public static String taskDataForList(BigInteger taskId, String text) throws JsonProcessingException {
+        ToDoTask toDoTask = new ToDoTask(taskId, text, false);
+        return turnObjectIntoJson(toDoTask);
     }
 
-    private static String secondTaskData(long taskId, String text) throws JsonProcessingException {
-        Task task = new Task(taskId, text, false);
-        return turnObjectIntoJson(task);
+    private static String secondTaskData(BigInteger taskId, String text) throws JsonProcessingException {
+        ToDoTask toDoTask = new ToDoTask(taskId, text, false);
+        return turnObjectIntoJson(toDoTask);
     }
 
     private static String taskDataWithInvalidId(String taskId) {
@@ -223,9 +232,9 @@ public class ToDoAppTestData {
                 + completeStatus + "}";
     }
 
-    private static String updateTaskData(long taskId) throws JsonProcessingException {
-        Task task = new Task(taskId, "Something to complete - OK", true);
-        return turnObjectIntoJson(task);
+    private static String updateTaskData(BigInteger taskId) throws JsonProcessingException {
+        ToDoTask toDoTask = new ToDoTask(taskId, "Something to complete - OK", true);
+        return turnObjectIntoJson(toDoTask);
     }
 
     private static String turnObjectIntoJson(Object object) throws JsonProcessingException {
