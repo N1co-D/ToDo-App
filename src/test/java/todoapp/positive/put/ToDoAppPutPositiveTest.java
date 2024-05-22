@@ -1,4 +1,4 @@
-package todoapp.positivetests.put;
+package todoapp.positive.put;
 
 import io.qameta.allure.Description;
 import io.restassured.http.ContentType;
@@ -8,8 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import todoapp.consts.Constants;
 
+import java.math.BigInteger;
+
 import static io.restassured.RestAssured.given;
-import static todoapp.positivetests.BaseTest.*;
+import static todoapp.positive.BasePositiveTest.*;
 
 @Slf4j
 public class ToDoAppPutPositiveTest {
@@ -17,8 +19,8 @@ public class ToDoAppPutPositiveTest {
     @DisplayName("TC-ID3")
     @Description("TC-ID3 Отправка запроса на обновление данных TODO-задачи")
     @ParameterizedTest
-    @MethodSource("todoapp.positivetests.ToDoAppTestData#checkUpdateToDoTaskTestData")
-    public void checkUpdateToDoTask(String taskJson, long id) {
+    @MethodSource("todoapp.positive.ToDoAppTestData#checkUpdateToDoTaskTestData")
+    public void checkUpdateToDoTask(String taskJson, BigInteger id) {
         log.info("Добавление задачи для теста");
         addTaskForTest(taskJson);
 
@@ -41,9 +43,10 @@ public class ToDoAppPutPositiveTest {
     @DisplayName("TC-ID33")
     @Description("TC-ID33 Проверка возникновения ошибки дублирования задачи при отправке запроса на обновление задачи")
     @ParameterizedTest
-    @MethodSource("todoapp.positivetests.ToDoAppTestData#checkFoDuplicateTaskErrorWhenUpdatingTestData")
+    @MethodSource("todoapp.positive.ToDoAppTestData#checkFoDuplicateTaskErrorWhenUpdatingTestData")
     public void checkFoDuplicateTaskErrorWhenUpdating(String firstTaskJsonToAdd, String secondTaskJsonToAdd,
-                                                      long firstTaskId, String taskJsonToUpdate, long updatedId) {
+                                                      BigInteger firstTaskId, String taskJsonToUpdate,
+                                                      BigInteger updatedId) {
         log.info("Добавление первой задачи для теста");
         addTaskForTest(firstTaskJsonToAdd);
 

@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
-    long id;
-    String text;
-    boolean completed;
+public class ToDoTask {
+    private BigInteger id;
+    private String text;
+    private boolean completed;
 }
